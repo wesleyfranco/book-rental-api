@@ -2,13 +2,16 @@
 
 ## Passo a passo para rodar o projeto
 <p>Clone o repositório</p>
+
 ```
 git clone https://github.com/wesleyfranco/book-rental-api.git book-rental-api
 ```
+
 ```
 cd book-rental-api/
 ```
 <p>Crie o Arquivo .env</p>
+
 ```
 cp .env.example .env
 ```
