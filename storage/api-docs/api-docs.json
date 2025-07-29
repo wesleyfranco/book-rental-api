@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://dev.book-rental-api/api/v1"
+            "url": "http://localhost:8989/api/v1"
         }
     ],
     "paths": {
@@ -59,7 +59,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Successful created",
+                        "description": "Successful registered",
                         "content": {
                             "application/json": {
                                 "schema": {}
