@@ -18,17 +18,30 @@ cp .env.example .env
 ## Atualize as variáveis de ambiente do arquivo .env
 
 ```
-APP_URL=http://localhost:8000
+APP_URL=http://localhost:8989
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_DATABASE=nome_que_desejar_db
-DB_USERNAME=nome_usuario
-DB_PASSWORD=senha_aqui
+DB_DATABASE=book_rental_api
+DB_USERNAME=root
+DB_PASSWORD=very_secret
 ```
+
+## Suba os containers do projeto
+```
+docker-compose up -d
+```
+
+## Acessar o container
+```
+docker-compose exec app bash
+```
+
+## Instalar as dependências do projeto
 ```
 composer install
 ```
+
 ## Gerar a key do projeto Laravel
 ```
 php artisan key:generate
@@ -45,4 +58,4 @@ php artisan jwt:secret
 ```
 php artisan l5-swagger:generate
 ```
-<p>Acesse a documentação via: http://localhost:8000/api/documentation</p>
+<p>Acesse a documentação via: http://localhost:8989/api/documentation</p>
