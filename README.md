@@ -59,3 +59,8 @@ php artisan jwt:secret
 php artisan l5-swagger:generate
 ```
 <p>Acesse a documentação via: http://localhost:8989/api/documentation</p>
+
+## Rodar os testes
+```
+php artisan test
+```
