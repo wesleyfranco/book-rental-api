@@ -18,7 +18,7 @@ class UserRegistrationTest extends TestCase
                 'email' => 'email@email.com',
                 'password' => '123456',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -32,7 +32,7 @@ class UserRegistrationTest extends TestCase
                 'name' => 'Johnny Bravo',
                 'password' => '123456',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -46,7 +46,7 @@ class UserRegistrationTest extends TestCase
                 'name' => 'Johnny Bravo',
                 'email' => 'email@email.com',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -60,7 +60,7 @@ class UserRegistrationTest extends TestCase
                 'name' => 'Johnny Bravo',
                 'email' => 'email@email.com',
                 'password' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -75,7 +75,7 @@ class UserRegistrationTest extends TestCase
                 'email' => 'email',
                 'password' => '123456',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -92,7 +92,7 @@ class UserRegistrationTest extends TestCase
                 'email' => $user->email,
                 'password' => '123456',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(422);
@@ -107,7 +107,7 @@ class UserRegistrationTest extends TestCase
                 'email' => 'email@email.com',
                 'password' => '123456',
                 'password_confirmation' => '123456',
-            ]
+            ],
         );
 
         $response->assertStatus(201);
