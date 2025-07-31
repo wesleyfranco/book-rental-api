@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserLoggedTest extends TestCase
 {
@@ -34,23 +35,9 @@ class UserLoggedTest extends TestCase
 
     public function test_check_that_the_logged_in_user_is_returned_correctly(): void
     {
-        $password = '123456';
+        $user = User::factory()->create();
 
-        $user = User::factory()->create(
-            [
-                'password' => $password,
-            ],
-        );
-
-        $loginResponse = $this->postJson(
-            'api/v1/auth/login', 
-            [
-                'email' => $user->email,
-                'password' => $password,
-            ],
-        )->json();
-
-        $token = $loginResponse['data']['access_token'];
+        $token = Auth::fromUser($user);
 
         $response = $this->postJson(
             $this->endpoint, 
@@ -73,7 +60,7 @@ class UserLoggedTest extends TestCase
                     'email_verified_at',
                     'created_at',
                     'updated_at',
-                ]
+                ],
             ],
         );
     }
