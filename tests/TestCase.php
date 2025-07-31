@@ -11,14 +11,14 @@ abstract class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
 
+    protected User $user;
     protected string $token;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $user = User::factory()->create();
-
-        $this->token = Auth::fromUser($user);
+        $this->user = User::factory()->create();
+        $this->token = Auth::fromUser($this->user);
     } 
 }
