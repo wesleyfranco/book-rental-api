@@ -3,8 +3,6 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserSessionRefreshTest extends TestCase
 {
@@ -23,9 +21,8 @@ class UserSessionRefreshTest extends TestCase
             ],
         );
 
-        $response->assertStatus(401);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(401)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',
@@ -35,21 +32,16 @@ class UserSessionRefreshTest extends TestCase
 
     public function test_checks_if_the_token_was_updated_correctly(): void
     {
-        $user = User::factory()->create();
-
-        $token = Auth::fromUser($user);
-
         $response = $this->postJson(
             $this->endpoint, 
             [], 
             [
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . $this->token,
             ],
         );
 
-        $response->assertStatus(200);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(200)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',

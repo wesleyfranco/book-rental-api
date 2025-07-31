@@ -22,7 +22,8 @@ class UserLoginTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['email']);
     }
 
     public function test_checks_if_the_password_is_required(): void
@@ -34,7 +35,8 @@ class UserLoginTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['password']);
     }
 
     public function test_check_if_email_is_a_valid_email(): void
@@ -47,7 +49,8 @@ class UserLoginTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['email']);
     }
 
     public function test_checks_if_login_failed_by_sending_a_non_existent_username(): void
@@ -60,9 +63,8 @@ class UserLoginTest extends TestCase
             ],
         );
 
-        $response->assertStatus(401);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(401)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',
@@ -86,9 +88,8 @@ class UserLoginTest extends TestCase
             ],
         );
 
-        $response->assertStatus(200);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(200)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',

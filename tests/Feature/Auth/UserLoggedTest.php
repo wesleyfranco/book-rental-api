@@ -3,8 +3,6 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserLoggedTest extends TestCase
 {
@@ -23,9 +21,8 @@ class UserLoggedTest extends TestCase
             ],
         );
 
-        $response->assertStatus(401);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(401)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',
@@ -35,21 +32,16 @@ class UserLoggedTest extends TestCase
 
     public function test_check_that_the_logged_in_user_is_returned_correctly(): void
     {
-        $user = User::factory()->create();
-
-        $token = Auth::fromUser($user);
-
         $response = $this->postJson(
             $this->endpoint, 
             [], 
             [
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . $this->token,
             ],
         );
 
-        $response->assertStatus(200);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(200)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',

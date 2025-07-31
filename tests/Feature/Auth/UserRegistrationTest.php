@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
 
 class UserRegistrationTest extends TestCase
 {
@@ -20,13 +20,14 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'email' => self::NAME,
+                'email' => self::EMAIL,
                 'password' => self::PASSWORD,
                 'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['name']);
     }
 
     public function test_checks_if_the_email_is_required(): void
@@ -40,7 +41,8 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['email']);
     }
 
     public function test_checks_if_the_password_is_required(): void
@@ -54,7 +56,8 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['password']);
     }
 
     public function test_checks_if_the_password_confirmation_is_required(): void
@@ -68,7 +71,8 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['password', 'password_confirmation']);
     }
 
     public function test_check_if_email_is_a_valid_email(): void
@@ -83,7 +87,8 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['email']);
     }
 
     public function test_check_if_email_is_already_registered(): void
@@ -100,7 +105,8 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertOnlyJsonValidationErrors(['email']);
     }
 
     public function test_check_if_the_user_has_been_successfully_registered(): void
@@ -115,6 +121,19 @@ class UserRegistrationTest extends TestCase
             ],
         );
 
-        $response->assertStatus(201);
+        $response->assertStatus(201)
+            ->assertExactJsonStructure(
+            [
+                'success',
+                'message',
+                'data' => [
+                    'id',
+                    'name',
+                    'email',
+                    'updated_at',
+                    'created_at',
+                ],
+            ],
+        );
     }
 }

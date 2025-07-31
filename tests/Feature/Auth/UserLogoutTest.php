@@ -3,8 +3,6 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserLogoutTest extends TestCase
 {
@@ -23,9 +21,8 @@ class UserLogoutTest extends TestCase
             ],
         );
 
-        $response->assertStatus(401);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(401)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',
@@ -35,21 +32,16 @@ class UserLogoutTest extends TestCase
 
     public function test_checks_whether_the_user_session_deletion_happened_correctly(): void
     {
-        $user = User::factory()->create();
-
-        $token = Auth::fromUser($user);
-
         $response = $this->postJson(
             $this->endpoint, 
             [], 
             [
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . $this->token,
             ],
         );
 
-        $response->assertStatus(200);
-
-        $response->assertExactJsonStructure(
+        $response->assertStatus(200)
+            ->assertExactJsonStructure(
             [
                 'success',
                 'message',
