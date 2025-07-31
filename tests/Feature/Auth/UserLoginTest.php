@@ -8,6 +8,9 @@ use Tests\TestCase;
 class UserLoginTest extends TestCase
 {
 
+    private const string EMAIL = 'email@email.com';
+    private const string PASSWORD = '123456';
+
     private string $endpoint = 'api/v1/auth/login';
 
     public function test_checks_if_the_email_is_required(): void
@@ -15,7 +18,7 @@ class UserLoginTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'password' => '123456',
+                'password' => self::PASSWORD,
             ],
         );
 
@@ -27,7 +30,7 @@ class UserLoginTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'email' => 'email@email.com',
+                'email' => self::EMAIL,
             ],
         );
 
@@ -40,7 +43,7 @@ class UserLoginTest extends TestCase
             $this->endpoint, 
             [
                 'email' => 'email',
-                'password' => '123456',
+                'password' => self::PASSWORD,
             ],
         );
 
@@ -52,8 +55,8 @@ class UserLoginTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'email' => 'email@email.com',
-                'password' => '123456',
+                'email' => self::EMAIL,
+                'password' => self::PASSWORD,
             ],
         );
 
@@ -69,11 +72,9 @@ class UserLoginTest extends TestCase
 
     public function test_checks_if_the_login_was_successful(): void
     {
-        $password = '123456';
-
         $user = User::factory()->create(
             [
-                'password' => $password,
+                'password' => self::PASSWORD,
             ],
         );
 
@@ -81,7 +82,7 @@ class UserLoginTest extends TestCase
             $this->endpoint, 
             [
                 'email' => $user->email,
-                'password' => $password,
+                'password' => self::PASSWORD,
             ],
         );
 
