@@ -8,6 +8,11 @@ use Tests\TestCase;
 class UserRegistrationTest extends TestCase
 {
 
+    private const string NAME = 'Johnny Bravo';
+    private const string EMAIL = 'email@email.com';
+    private const string PASSWORD = '123456';
+    private const string PASSWORD_CONFIRMATION = '123456';
+
     private string $endpoint = 'api/v1/auth/register';
 
     public function test_checks_if_the_username_is_required(): void
@@ -15,9 +20,9 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'email' => 'email@email.com',
-                'password' => '123456',
-                'password_confirmation' => '123456',
+                'email' => self::NAME,
+                'password' => self::PASSWORD,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
@@ -29,9 +34,9 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
-                'password' => '123456',
-                'password_confirmation' => '123456',
+                'name' => self::NAME,
+                'password' => self::PASSWORD,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
@@ -43,9 +48,9 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
-                'email' => 'email@email.com',
-                'password_confirmation' => '123456',
+                'name' => self::NAME,
+                'email' => self::EMAIL,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
@@ -57,9 +62,9 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
-                'email' => 'email@email.com',
-                'password' => '123456',
+                'name' => self::NAME,
+                'email' => self::EMAIL,
+                'password' => self::PASSWORD,
             ],
         );
 
@@ -71,10 +76,10 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
+                'name' => self::NAME,
                 'email' => 'email',
-                'password' => '123456',
-                'password_confirmation' => '123456',
+                'password' => self::PASSWORD,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
@@ -88,10 +93,10 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
+                'name' => self::NAME,
                 'email' => $user->email,
-                'password' => '123456',
-                'password_confirmation' => '123456',
+                'password' => self::PASSWORD,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
@@ -103,10 +108,10 @@ class UserRegistrationTest extends TestCase
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => 'Johnny Bravo',
-                'email' => 'email@email.com',
-                'password' => '123456',
-                'password_confirmation' => '123456',
+                'name' => self::NAME,
+                'email' => self::EMAIL,
+                'password' => self::PASSWORD,
+                'password_confirmation' => self::PASSWORD_CONFIRMATION,
             ],
         );
 
