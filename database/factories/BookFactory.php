@@ -20,7 +20,7 @@ class BookFactory extends Factory
         return [
             'name' => fake()->sentence(5),
             'synopsis' => fake()->text(),
-            'publisher' => fake()->word(),
+            'publisher' => Str::random(10),
             'edition' => (string) fake()->randomDigit(),
             'page_number' => fake()->randomNumber(3),
             'isbn' => fake()->isbn13(),
