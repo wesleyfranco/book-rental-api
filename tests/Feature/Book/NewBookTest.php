@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Book;
 
-use App\Models\Book;
 use Tests\TestCase;
 
 class NewBookTest extends TestCase
@@ -197,12 +196,10 @@ class NewBookTest extends TestCase
 
     public function test_check_if_book_name_is_already_registered(): void
     {
-        $book = Book::factory()->create();
-
         $response = $this->postJson(
             $this->endpoint, 
             [
-                'name' => $book->name,
+                'name' => $this->book->name,
                 'synopsis' => self::SYNOPSIS,
                 'publisher' => self::PUBLISHER,
                 'edition' => self::EDITION,

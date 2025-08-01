@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Book;
 
-use App\Models\Book;
 use Tests\TestCase;
 
 class BookByIdTest extends TestCase
@@ -12,10 +11,8 @@ class BookByIdTest extends TestCase
 
     public function test_checks_that_the_book_has_been_returned_successfully(): void
     {
-        $book = Book::factory()->create();
-
         $response = $this->getJson(
-            "{$this->endpoint}/{$book->id}",
+            "{$this->endpoint}/{$this->book->id}",
             [
                 'Authorization' => 'Bearer ' . $this->token,
             ],
@@ -24,17 +21,17 @@ class BookByIdTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment(
             [
-                'id' => $book->id,
-                'name' => $book->name,
-                'synopsis' => $book->synopsis,
-                'publisher' => $book->publisher,
-                'edition' => $book->edition,
-                'page_number' => $book->page_number,
-                'isbn' => $book->isbn,
-                'language' => $book->language,
-                'release_date' => $book->release_date,
-                'created_at' => $book->created_at,
-                'updated_at' => $book->updated_at,
+                'id' => $this->book->id,
+                'name' => $this->book->name,
+                'synopsis' => $this->book->synopsis,
+                'publisher' => $this->book->publisher,
+                'edition' => $this->book->edition,
+                'page_number' => $this->book->page_number,
+                'isbn' => $this->book->isbn,
+                'language' => $this->book->language,
+                'release_date' => $this->book->release_date,
+                'created_at' => $this->book->created_at,
+                'updated_at' => $this->book->updated_at,
             ],
         );
     }
