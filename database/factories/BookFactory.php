@@ -21,7 +21,7 @@ class BookFactory extends Factory
             'name' => fake()->sentence(5),
             'synopsis' => fake()->text(),
             'publisher' => fake()->word(),
-            'edition' => fake()->randomDigit(),
+            'edition' => (string) fake()->randomDigit(),
             'page_number' => fake()->randomNumber(3),
             'isbn' => fake()->isbn13(),
             'language' => Str::random(10),
