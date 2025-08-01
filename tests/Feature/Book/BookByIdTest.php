@@ -59,7 +59,7 @@ class BookByIdTest extends TestCase
         $token = 'abc';
 
         $response = $this->getJson(
-            $this->endpoint,
+            "{$this->endpoint}/{$this->book->id}",
             [
                 'Authorization' => 'Bearer ' . $token,
             ],
