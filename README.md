@@ -22,9 +22,9 @@ APP_URL=http://localhost:8989
 DB_CONNECTION=mysql
 DB_HOST=book-rental-api-database-1
 DB_PORT=3306
-DB_DATABASE=book_rental_api
-DB_USERNAME=root
-DB_PASSWORD=very_secret
+DB_DATABASE=seu_banco_de_dados
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
 ```
 
 ## Suba os containers do projeto
