@@ -43,8 +43,8 @@ class UserLogoutTest extends TestCase
         $response->assertStatus(200)
             ->assertExactJsonStructure(
             [
+                'data',
                 'success',
-                'message',
             ],
         );
     }

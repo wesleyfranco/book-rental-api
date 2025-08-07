@@ -125,7 +125,6 @@ class UserRegistrationTest extends TestCase
             ->assertExactJsonStructure(
             [
                 'success',
-                'message',
                 'data' => [
                     'id',
                     'name',

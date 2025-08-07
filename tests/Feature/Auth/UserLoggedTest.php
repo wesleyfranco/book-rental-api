@@ -44,7 +44,6 @@ class UserLoggedTest extends TestCase
             ->assertExactJsonStructure(
             [
                 'success',
-                'message',
                 'data' => [
                     'id',
                     'name',

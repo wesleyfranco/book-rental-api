@@ -19,13 +19,7 @@ class DeleteBookTest extends TestCase
             ],
         );
 
-        $response->assertStatus(200)
-            ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+        $response->assertStatus(204);
     }
 
     public function test_check_that_the_book_is_not_found(): void

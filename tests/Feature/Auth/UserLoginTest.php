@@ -92,7 +92,6 @@ class UserLoginTest extends TestCase
             ->assertExactJsonStructure(
             [
                 'success',
-                'message',
                 'data' => [
                     'access_token',
                     'token_type',

@@ -44,7 +44,6 @@ class UserSessionRefreshTest extends TestCase
             ->assertExactJsonStructure(
             [
                 'success',
-                'message',
                 'data' => [
                     'access_token',
                     'token_type',
