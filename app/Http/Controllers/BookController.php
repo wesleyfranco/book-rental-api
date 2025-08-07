@@ -54,7 +54,7 @@ class BookController extends Controller
     {
         $books = $this->bookService->all();
 
-        return $this->success('', $books);
+        return HttpResponse::success($books);
     }
 
     /**
@@ -121,7 +121,7 @@ class BookController extends Controller
     {
         $book = $this->bookService->store($request);
 
-        return $this->success('Book successfully registered', $book, Response::HTTP_CREATED);
+        return HttpResponse::success($book, Response::HTTP_CREATED);
     }
 
     /**
@@ -146,10 +146,10 @@ class BookController extends Controller
         $book = $this->bookService->show($id);
 
         if (empty($book)) {
-            return $this->error('Book not found', Response::HTTP_NOT_FOUND);
+            return HttpResponse::error('Book not found', Response::HTTP_NOT_FOUND);
         }
 
-        return $this->success('', $book);
+        return HttpResponse::success($book);
     }
 
     /**
@@ -224,10 +224,10 @@ class BookController extends Controller
         $book = $this->bookService->update($request, $id);
 
         if (empty($book)) {
-            return $this->error('Book not found', Response::HTTP_NOT_FOUND);
+            return HttpResponse::error('Book not found', Response::HTTP_NOT_FOUND);
         }
 
-        return $this->success('', $book);
+        return HttpResponse::success($book);
     }
 
     /**
@@ -242,7 +242,7 @@ class BookController extends Controller
      *         required=true,
      *      ),
      *     security={{"bearerAuth":{}}},
-     *     @OA\Response(response=200, description="Successful", @OA\JsonContent()),
+     *     @OA\Response(response=204, description="Successful", @OA\JsonContent()),
      *     @OA\Response(response=401, description="Unauthorized", @OA\JsonContent()),
      *     @OA\Response(response=404, description="Book not found", @OA\JsonContent()),
      * )
@@ -252,9 +252,9 @@ class BookController extends Controller
         $book = $this->bookService->destroy($id);
 
         if (!$book) {
-            return $this->error('Book not found', Response::HTTP_NOT_FOUND);
+            return HttpResponse::error('Book not found', Response::HTTP_NOT_FOUND);
         }
 
-        return $this->success('Book deleted successfully', []);
+        return HttpResponse::success([], Response::HTTP_NO_CONTENT);
     }
 }

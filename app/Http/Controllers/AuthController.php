@@ -62,7 +62,7 @@ class AuthController extends Controller
     {
         $user = $this->authService->register($request, $authRepository);
 
-        return $this->success('User successfully registered', $user, Response::HTTP_CREATED);
+        return HttpResponse::success($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -99,10 +99,10 @@ class AuthController extends Controller
         $token = $this->authService->login($request);
 
         if (empty($token)) {
-            return $this->error('Unauthorized', Response::HTTP_UNAUTHORIZED);
+            return HttpResponse::error('Unauthorized', Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->success('Session successfully initialized', $token);
+        return HttpResponse::success($token);
     }
 
     /**
@@ -119,7 +119,7 @@ class AuthController extends Controller
     {
         $user = $this->authService->me();
 
-        return $this->success('Authenticated user', $user);
+        return HttpResponse::success($user);
     }
 
     /**
@@ -136,7 +136,7 @@ class AuthController extends Controller
     {
         $token = $this->authService->refresh();
 
-        return $this->success('Session successfully updated', $token);
+        return HttpResponse::success($token);
     }
 
     /**
@@ -153,6 +153,6 @@ class AuthController extends Controller
     {
         $this->authService->logout();
 
-        return $this->success('Successfully logged out');
+        return HttpResponse::success();
     }
 }
