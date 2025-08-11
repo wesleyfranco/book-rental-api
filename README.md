@@ -20,7 +20,7 @@ cp .env.example .env
 ```
 APP_URL=http://localhost:8989
 DB_CONNECTION=mysql
-DB_HOST=book-rental-api-database-1
+DB_HOST=database
 DB_PORT=3306
 DB_DATABASE=seu_banco_de_dados
 DB_USERNAME=seu_usuario
