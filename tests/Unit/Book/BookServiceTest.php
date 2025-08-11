@@ -75,4 +75,11 @@ class BookServiceTest extends TestCase
         $this->assertArrayHasKey('language', $book);
         $this->assertArrayHasKey('release_date', $book);
     }
+
+    public function test_check_if_not_found_the_book_by_id(): void
+    {
+        $book = $this->bookService->show('abc');
+
+        $this->assertCount(0, $book);
+    }
 }
