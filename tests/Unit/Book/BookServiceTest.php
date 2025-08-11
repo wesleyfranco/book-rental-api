@@ -82,4 +82,74 @@ class BookServiceTest extends TestCase
 
         $this->assertCount(0, $book);
     }
+
+    public function test_check_if_you_have_successfully_update_the_book(): void
+    {
+        $name = fake()->sentence(5);
+        $synopsis = fake()->text();
+        $publisher = Str::random(10);
+        $edition = (string) fake()->randomDigit();
+        $pageNumber = fake()->randomNumber(3);
+        $isbn = fake()->isbn13();
+        $language = Str::random(10);
+        $releaseDate = fake()->date();
+
+        $mockRequest = Mockery::mock(BookRequest::class);
+
+        $mockRequest->shouldReceive('validated')
+            ->andReturn([
+                'name' => $name,
+                'synopsis' => $synopsis,
+                'publisher' => $publisher,
+                'edition' => $edition,
+                'page_number' => $pageNumber,
+                'isbn' => $isbn,
+                'language' => $language,
+                'release_date' => $releaseDate,
+        ]);
+
+        $book = $this->bookService->update($mockRequest, $this->book->id);
+
+        $this->assertEquals($name, $book['name']);
+        $this->assertEquals($synopsis, $book['synopsis']);
+        $this->assertEquals($publisher, $book['publisher']);
+        $this->assertEquals($edition, $book['edition']);
+        $this->assertEquals($pageNumber, $book['page_number']);
+        $this->assertEquals($isbn, $book['isbn']);
+        $this->assertEquals($language, $book['language']);
+        $this->assertEquals($releaseDate, $book['release_date']);
+    }
+
+    public function test_check_if_not_have_successfully_update_the_book(): void
+    {
+        $mockRequest = Mockery::mock(BookRequest::class);
+
+        $mockRequest->shouldReceive('validated')
+            ->andReturn([]);
+
+        $book = $this->bookService->update($mockRequest, $this->book->id);
+
+        $this->assertEquals($this->book->name, $book['name']);
+        $this->assertEquals($this->book->synopsis, $book['synopsis']);
+        $this->assertEquals($this->book->publisher, $book['publisher']);
+        $this->assertEquals($this->book->edition, $book['edition']);
+        $this->assertEquals($this->book->page_number, $book['page_number']);
+        $this->assertEquals($this->book->isbn, $book['isbn']);
+        $this->assertEquals($this->book->language, $book['language']);
+        $this->assertEquals($this->book->release_date, $book['release_date']);
+    }
+
+    public function test_checks_if_the_book_has_been_successfully_deleted(): void
+    {
+        $deleted = $this->bookService->destroy($this->book->id);
+
+        $this->assertTrue($deleted);
+    }
+
+    public function test_checks_if_the_book_has_not_successfully_deleted(): void
+    {
+        $deleted = $this->bookService->destroy('abc');
+
+        $this->assertFalse($deleted);
+    }
 }
