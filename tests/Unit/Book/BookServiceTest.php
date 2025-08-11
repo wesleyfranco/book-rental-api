@@ -23,11 +23,12 @@ class BookServiceTest extends TestCase
 
         $this->bookRepository = new BookRepository(new Book);
         $this->bookService = new BookService($this->bookRepository);
-        $this->bookService->destroy($this->book->id);
     }
 
     public function test_check_that_there_are_no_registered_books(): void
     {
+        $this->bookService->destroy($this->book->id);
+
         $allBooks = $this->bookService->all();
 
         $this->assertCount(0, $allBooks['data']);
@@ -50,6 +51,20 @@ class BookServiceTest extends TestCase
         ]);
 
         $book = $this->bookService->store($mockRequest);
+
+        $this->assertArrayHasKey('name', $book);
+        $this->assertArrayHasKey('synopsis', $book);
+        $this->assertArrayHasKey('publisher', $book);
+        $this->assertArrayHasKey('edition', $book);
+        $this->assertArrayHasKey('page_number', $book);
+        $this->assertArrayHasKey('isbn', $book);
+        $this->assertArrayHasKey('language', $book);
+        $this->assertArrayHasKey('release_date', $book);
+    }
+
+    public function test_check_if_you_found_the_book_by_id(): void
+    {
+        $book = $this->bookService->show($this->book->id);
 
         $this->assertArrayHasKey('name', $book);
         $this->assertArrayHasKey('synopsis', $book);
