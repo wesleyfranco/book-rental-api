@@ -145,4 +145,11 @@ class BookServiceTest extends TestCase
 
         $this->assertTrue($deleted);
     }
+
+    public function test_checks_if_the_book_has_not_successfully_deleted(): void
+    {
+        $deleted = $this->bookService->destroy('abc');
+
+        $this->assertFalse($deleted);
+    }
 }
