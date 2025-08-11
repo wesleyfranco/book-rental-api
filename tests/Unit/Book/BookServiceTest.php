@@ -82,4 +82,41 @@ class BookServiceTest extends TestCase
 
         $this->assertCount(0, $book);
     }
+
+    public function test_check_if_you_have_successfully_update_the_book(): void
+    {
+        $name = fake()->sentence(5);
+        $synopsis = fake()->text();
+        $publisher = Str::random(10);
+        $edition = (string) fake()->randomDigit();
+        $pageNumber = fake()->randomNumber(3);
+        $isbn = fake()->isbn13();
+        $language = Str::random(10);
+        $releaseDate = fake()->date();
+
+        $mockRequest = Mockery::mock(BookRequest::class);
+
+        $mockRequest->shouldReceive('validated')
+            ->andReturn([
+                'name' => $name,
+                'synopsis' => $synopsis,
+                'publisher' => $publisher,
+                'edition' => $edition,
+                'page_number' => $pageNumber,
+                'isbn' => $isbn,
+                'language' => $language,
+                'release_date' => $releaseDate,
+        ]);
+
+        $book = $this->bookService->update($mockRequest, $this->book->id);
+
+        $this->assertEquals($name, $book['name']);
+        $this->assertEquals($synopsis, $book['synopsis']);
+        $this->assertEquals($publisher, $book['publisher']);
+        $this->assertEquals($edition, $book['edition']);
+        $this->assertEquals($pageNumber, $book['page_number']);
+        $this->assertEquals($isbn, $book['isbn']);
+        $this->assertEquals($language, $book['language']);
+        $this->assertEquals($releaseDate, $book['release_date']);
+    }
 }
