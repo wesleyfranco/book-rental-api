@@ -119,4 +119,23 @@ class BookServiceTest extends TestCase
         $this->assertEquals($language, $book['language']);
         $this->assertEquals($releaseDate, $book['release_date']);
     }
+
+    public function test_check_if_not_have_successfully_update_the_book(): void
+    {
+        $mockRequest = Mockery::mock(BookRequest::class);
+
+        $mockRequest->shouldReceive('validated')
+            ->andReturn([]);
+
+        $book = $this->bookService->update($mockRequest, $this->book->id);
+
+        $this->assertEquals($this->book->name, $book['name']);
+        $this->assertEquals($this->book->synopsis, $book['synopsis']);
+        $this->assertEquals($this->book->publisher, $book['publisher']);
+        $this->assertEquals($this->book->edition, $book['edition']);
+        $this->assertEquals($this->book->page_number, $book['page_number']);
+        $this->assertEquals($this->book->isbn, $book['isbn']);
+        $this->assertEquals($this->book->language, $book['language']);
+        $this->assertEquals($this->book->release_date, $book['release_date']);
+    }
 }
