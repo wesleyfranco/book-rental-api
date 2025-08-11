@@ -138,4 +138,11 @@ class BookServiceTest extends TestCase
         $this->assertEquals($this->book->language, $book['language']);
         $this->assertEquals($this->book->release_date, $book['release_date']);
     }
+
+    public function test_checks_if_the_book_has_been_successfully_deleted(): void
+    {
+        $deleted = $this->bookService->destroy($this->book->id);
+
+        $this->assertTrue($deleted);
+    }
 }
