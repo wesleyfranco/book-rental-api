@@ -48,7 +48,7 @@ class BookServiceTest extends TestCase
                 'isbn' => fake()->isbn13(),
                 'language' => Str::random(10),
                 'release_date' => fake()->date(),
-        ]);
+            ]);
 
         $book = $this->bookService->store($mockRequest);
 
@@ -106,7 +106,7 @@ class BookServiceTest extends TestCase
                 'isbn' => $isbn,
                 'language' => $language,
                 'release_date' => $releaseDate,
-        ]);
+            ]);
 
         $book = $this->bookService->update($mockRequest, $this->book->id);
 

@@ -14,8 +14,8 @@ class UserLogoutTest extends TestCase
         $token = 'abc';
 
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $token,
             ],
@@ -23,18 +23,18 @@ class UserLogoutTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 
     public function test_checks_whether_the_user_session_deletion_happened_correctly(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $this->token,
             ],
@@ -42,10 +42,10 @@ class UserLogoutTest extends TestCase
 
         $response->assertStatus(200)
             ->assertExactJsonStructure(
-            [
-                'data',
-                'success',
-            ],
-        );
+                [
+                    'data',
+                    'success',
+                ],
+            );
     }
 }

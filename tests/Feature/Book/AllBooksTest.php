@@ -20,20 +20,20 @@ class AllBooksTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment(
-            [
-                'id' => $this->book->id,
-                'name' => $this->book->name,
-                'synopsis' => $this->book->synopsis,
-                'publisher' => $this->book->publisher,
-                'edition' => $this->book->edition,
-                'page_number' => $this->book->page_number,
-                'isbn' => $this->book->isbn,
-                'language' => $this->book->language,
-                'release_date' => $this->book->release_date,
-                'created_at' => $this->book->created_at,
-                'updated_at' => $this->book->updated_at,
-            ],
-        );
+                [
+                    'id' => $this->book->id,
+                    'name' => $this->book->name,
+                    'synopsis' => $this->book->synopsis,
+                    'publisher' => $this->book->publisher,
+                    'edition' => $this->book->edition,
+                    'page_number' => $this->book->page_number,
+                    'isbn' => $this->book->isbn,
+                    'language' => $this->book->language,
+                    'release_date' => $this->book->release_date,
+                    'created_at' => $this->book->created_at,
+                    'updated_at' => $this->book->updated_at,
+                ],
+            );
     }
 
     public function test_checks_if_the_route_is_protected(): void
@@ -49,10 +49,10 @@ class AllBooksTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 }

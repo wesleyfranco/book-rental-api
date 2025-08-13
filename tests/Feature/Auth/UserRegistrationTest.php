@@ -18,7 +18,7 @@ class UserRegistrationTest extends TestCase
     public function test_checks_if_the_username_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'email' => self::EMAIL,
                 'password' => self::PASSWORD,
@@ -33,7 +33,7 @@ class UserRegistrationTest extends TestCase
     public function test_checks_if_the_email_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'password' => self::PASSWORD,
@@ -48,7 +48,7 @@ class UserRegistrationTest extends TestCase
     public function test_checks_if_the_password_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'email' => self::EMAIL,
@@ -63,7 +63,7 @@ class UserRegistrationTest extends TestCase
     public function test_checks_if_the_password_confirmation_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'email' => self::EMAIL,
@@ -78,7 +78,7 @@ class UserRegistrationTest extends TestCase
     public function test_check_if_email_is_a_valid_email(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'email' => 'email',
@@ -96,7 +96,7 @@ class UserRegistrationTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'email' => $user->email,
@@ -112,7 +112,7 @@ class UserRegistrationTest extends TestCase
     public function test_check_if_the_user_has_been_successfully_registered(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'email' => self::EMAIL,
@@ -123,16 +123,16 @@ class UserRegistrationTest extends TestCase
 
         $response->assertStatus(201)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'data' => [
-                    'id',
-                    'name',
-                    'email',
-                    'updated_at',
-                    'created_at',
+                [
+                    'success',
+                    'data' => [
+                        'id',
+                        'name',
+                        'email',
+                        'updated_at',
+                        'created_at',
+                    ],
                 ],
-            ],
-        );
+            );
     }
 }

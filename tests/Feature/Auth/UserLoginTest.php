@@ -16,7 +16,7 @@ class UserLoginTest extends TestCase
     public function test_checks_if_the_email_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'password' => self::PASSWORD,
             ],
@@ -29,7 +29,7 @@ class UserLoginTest extends TestCase
     public function test_checks_if_the_password_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'email' => self::EMAIL,
             ],
@@ -42,7 +42,7 @@ class UserLoginTest extends TestCase
     public function test_check_if_email_is_a_valid_email(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'email' => 'email',
                 'password' => self::PASSWORD,
@@ -56,7 +56,7 @@ class UserLoginTest extends TestCase
     public function test_checks_if_login_failed_by_sending_a_non_existent_username(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'email' => self::EMAIL,
                 'password' => self::PASSWORD,
@@ -65,11 +65,11 @@ class UserLoginTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 
     public function test_checks_if_the_login_was_successful(): void
@@ -81,7 +81,7 @@ class UserLoginTest extends TestCase
         );
 
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'email' => $user->email,
                 'password' => self::PASSWORD,
@@ -90,14 +90,14 @@ class UserLoginTest extends TestCase
 
         $response->assertStatus(200)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'data' => [
-                    'access_token',
-                    'token_type',
-                    'expires_in',
+                [
+                    'success',
+                    'data' => [
+                        'access_token',
+                        'token_type',
+                        'expires_in',
+                    ],
                 ],
-            ],
-        );
+            );
     }
 }

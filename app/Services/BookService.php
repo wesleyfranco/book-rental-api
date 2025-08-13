@@ -9,9 +9,7 @@ use App\Interfaces\RepositoryInterface;
 class BookService implements BookServiceInterface
 {
 
-    public function __construct(private readonly RepositoryInterface $bookRepository)
-    {
-    }
+    public function __construct(private readonly RepositoryInterface $bookRepository) {}
 
     public function all(): array
     {

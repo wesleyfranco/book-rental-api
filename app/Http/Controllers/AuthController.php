@@ -16,9 +16,7 @@ class AuthController extends Controller
 
     use HttpResponse;
 
-    public function __construct(private readonly AuthServiceInterface $authService)
-    {
-    }
+    public function __construct(private readonly AuthServiceInterface $authService) {}
 
     /**
      * @OA\Post(
@@ -58,7 +56,7 @@ class AuthController extends Controller
      *      @OA\Response(response=422, description="Validation errors", @OA\JsonContent()),
      *  )
      */
-    public function register(RegisterRequestInterface $request, AuthRepositoryInterface $authRepository): JsonResponse 
+    public function register(RegisterRequestInterface $request, AuthRepositoryInterface $authRepository): JsonResponse
     {
         $user = $this->authService->register($request, $authRepository);
 

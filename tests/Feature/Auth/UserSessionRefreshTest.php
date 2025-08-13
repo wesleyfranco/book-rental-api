@@ -14,8 +14,8 @@ class UserSessionRefreshTest extends TestCase
         $token = 'abc';
 
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $token,
             ],
@@ -23,18 +23,18 @@ class UserSessionRefreshTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 
     public function test_checks_if_the_token_was_updated_correctly(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $this->token,
             ],
@@ -42,14 +42,14 @@ class UserSessionRefreshTest extends TestCase
 
         $response->assertStatus(200)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'data' => [
-                    'access_token',
-                    'token_type',
-                    'expires_in',
+                [
+                    'success',
+                    'data' => [
+                        'access_token',
+                        'token_type',
+                        'expires_in',
+                    ],
                 ],
-            ],
-        );
+            );
     }
 }
