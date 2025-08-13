@@ -2,7 +2,4 @@
 
 namespace App\Interfaces;
 
-interface LoginRequestInterface
-{
-    public function validated($key = null, $default = null);
-}
+interface LoginRequestInterface extends FormRequestInterface {}

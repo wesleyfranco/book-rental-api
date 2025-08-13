@@ -10,7 +10,7 @@ use App\Interfaces\BookServiceInterface;
 
 class BookController extends Controller
 {
-    
+
     use HttpResponse;
 
     /**
@@ -26,9 +26,7 @@ class BookController extends Controller
      * )
      *
      */
-    public function __construct(private readonly BookServiceInterface $bookService)
-    {
-    }
+    public function __construct(private readonly BookServiceInterface $bookService) {}
 
     /**
      * @OA\Get(

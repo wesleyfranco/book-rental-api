@@ -14,8 +14,8 @@ class UserLoggedTest extends TestCase
         $token = 'abc';
 
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $token,
             ],
@@ -23,18 +23,18 @@ class UserLoggedTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 
     public function test_check_that_the_logged_in_user_is_returned_correctly(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
-            [], 
+            $this->endpoint,
+            [],
             [
                 'Authorization' => 'Bearer ' . $this->token,
             ],
@@ -42,17 +42,17 @@ class UserLoggedTest extends TestCase
 
         $response->assertStatus(200)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'data' => [
-                    'id',
-                    'name',
-                    'email',
-                    'email_verified_at',
-                    'created_at',
-                    'updated_at',
+                [
+                    'success',
+                    'data' => [
+                        'id',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'created_at',
+                        'updated_at',
+                    ],
                 ],
-            ],
-        );
+            );
     }
 }

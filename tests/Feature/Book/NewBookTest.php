@@ -21,7 +21,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_name_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'synopsis' => self::SYNOPSIS,
                 'publisher' => self::PUBLISHER,
@@ -43,7 +43,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_synopsis_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'publisher' => self::PUBLISHER,
@@ -65,7 +65,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_publisher_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -87,7 +87,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_edition_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -109,7 +109,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_page_number_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -131,7 +131,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_isbn_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -153,7 +153,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_language_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -175,7 +175,7 @@ class NewBookTest extends TestCase
     public function test_checks_if_the_release_date_is_required(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -197,7 +197,7 @@ class NewBookTest extends TestCase
     public function test_check_if_book_name_is_already_registered(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => $this->book->name,
                 'synopsis' => self::SYNOPSIS,
@@ -220,7 +220,7 @@ class NewBookTest extends TestCase
     public function test_check_if_the_book_has_been_successfully_registered(): void
     {
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -238,17 +238,17 @@ class NewBookTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonFragment(
-            [
-                'name' => self::NAME,
-                'synopsis' => self::SYNOPSIS,
-                'publisher' => self::PUBLISHER,
-                'edition' => self::EDITION,
-                'page_number' => self::PAGE_NUMBER,
-                'isbn' => self::ISBN,
-                'language' => self::LANGUAGE,
-                'release_date' => self::RELEASE_DATE
-            ],
-        );
+                [
+                    'name' => self::NAME,
+                    'synopsis' => self::SYNOPSIS,
+                    'publisher' => self::PUBLISHER,
+                    'edition' => self::EDITION,
+                    'page_number' => self::PAGE_NUMBER,
+                    'isbn' => self::ISBN,
+                    'language' => self::LANGUAGE,
+                    'release_date' => self::RELEASE_DATE
+                ],
+            );
     }
 
     public function test_checks_if_the_route_is_protected(): void
@@ -256,7 +256,7 @@ class NewBookTest extends TestCase
         $token = 'abc';
 
         $response = $this->postJson(
-            $this->endpoint, 
+            $this->endpoint,
             [
                 'name' => self::NAME,
                 'synopsis' => self::SYNOPSIS,
@@ -274,10 +274,10 @@ class NewBookTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 }

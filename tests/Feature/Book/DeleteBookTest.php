@@ -34,11 +34,11 @@ class DeleteBookTest extends TestCase
 
         $response->assertStatus(404)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 
     public function test_checks_if_the_route_is_protected(): void
@@ -55,10 +55,10 @@ class DeleteBookTest extends TestCase
 
         $response->assertStatus(401)
             ->assertExactJsonStructure(
-            [
-                'success',
-                'message',
-            ],
-        );
+                [
+                    'success',
+                    'message',
+                ],
+            );
     }
 }

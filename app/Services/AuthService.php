@@ -11,7 +11,7 @@ use App\Interfaces\RegisterRequestInterface;
 class AuthService implements AuthServiceInterface
 {
 
-    public function register(RegisterRequestInterface $request, AuthRepositoryInterface $authRepository): array 
+    public function register(RegisterRequestInterface $request, AuthRepositoryInterface $authRepository): array
     {
         $user = $authRepository->register($request);
 
@@ -26,11 +26,11 @@ class AuthService implements AuthServiceInterface
         $credentials = \compact('email', 'password');
 
         $token = Auth::attempt($credentials);
-  
+
         if (!$token) {
             return [];
         }
-  
+
         return $this->respondWithToken($token);
     }
 
