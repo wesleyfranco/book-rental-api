@@ -14,12 +14,29 @@ use App\Repositories\BookRepositoryEloquent;
 
 class BookServiceTest extends TestCase
 {
+    private string $name;
+    private string $synopsis;
+    private string $publisher;
+    private string $edition;
+    private int $pageNumber;
+    private string $isbn;
+    private string $language;
+    private string $releaseDate;
     private RepositoryInterface $bookRepository;
     private BookServiceInterface $bookService;
 
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->name = fake()->sentence(5);
+        $this->synopsis = fake()->text();
+        $this->publisher = Str::random(10);
+        $this->edition = (string) fake()->randomDigit();
+        $this->pageNumber = fake()->randomNumber(3);
+        $this->isbn = fake()->isbn13();
+        $this->language = Str::random(10);
+        $this->releaseDate = fake()->date();
 
         $this->bookRepository = new BookRepositoryEloquent(new Book);
         $this->bookService = new BookService($this->bookRepository);
@@ -40,14 +57,14 @@ class BookServiceTest extends TestCase
 
         $mockRequest->shouldReceive('validated')
             ->andReturn([
-                'name' => fake()->sentence(5),
-                'synopsis' => fake()->text(),
-                'publisher' => Str::random(10),
-                'edition' => (string) fake()->randomDigit(),
-                'page_number' => fake()->randomNumber(3),
-                'isbn' => fake()->isbn13(),
-                'language' => Str::random(10),
-                'release_date' => fake()->date(),
+                'name' => $this->name,
+                'synopsis' => $this->synopsis,
+                'publisher' => $this->publisher,
+                'edition' => $this->edition,
+                'page_number' => $this->pageNumber,
+                'isbn' => $this->isbn,
+                'language' => $this->language,
+                'release_date' => $this->releaseDate,
             ]);
 
         $book = $this->bookService->store($mockRequest);
@@ -85,39 +102,30 @@ class BookServiceTest extends TestCase
 
     public function test_check_if_you_have_successfully_update_the_book(): void
     {
-        $name = fake()->sentence(5);
-        $synopsis = fake()->text();
-        $publisher = Str::random(10);
-        $edition = (string) fake()->randomDigit();
-        $pageNumber = fake()->randomNumber(3);
-        $isbn = fake()->isbn13();
-        $language = Str::random(10);
-        $releaseDate = fake()->date();
-
         $mockRequest = Mockery::mock(BookRequest::class);
 
         $mockRequest->shouldReceive('validated')
             ->andReturn([
-                'name' => $name,
-                'synopsis' => $synopsis,
-                'publisher' => $publisher,
-                'edition' => $edition,
-                'page_number' => $pageNumber,
-                'isbn' => $isbn,
-                'language' => $language,
-                'release_date' => $releaseDate,
+                'name' => $this->name,
+                'synopsis' => $this->synopsis,
+                'publisher' => $this->publisher,
+                'edition' => $this->edition,
+                'page_number' => $this->pageNumber,
+                'isbn' => $this->isbn,
+                'language' => $this->language,
+                'release_date' => $this->releaseDate,
             ]);
 
         $book = $this->bookService->update($mockRequest, $this->book->id);
 
-        $this->assertEquals($name, $book['name']);
-        $this->assertEquals($synopsis, $book['synopsis']);
-        $this->assertEquals($publisher, $book['publisher']);
-        $this->assertEquals($edition, $book['edition']);
-        $this->assertEquals($pageNumber, $book['page_number']);
-        $this->assertEquals($isbn, $book['isbn']);
-        $this->assertEquals($language, $book['language']);
-        $this->assertEquals($releaseDate, $book['release_date']);
+        $this->assertEquals($this->name, $book['name']);
+        $this->assertEquals($this->synopsis, $book['synopsis']);
+        $this->assertEquals($this->publisher, $book['publisher']);
+        $this->assertEquals($this->edition, $book['edition']);
+        $this->assertEquals($this->pageNumber, $book['page_number']);
+        $this->assertEquals($this->isbn, $book['isbn']);
+        $this->assertEquals($this->language, $book['language']);
+        $this->assertEquals($this->releaseDate, $book['release_date']);
     }
 
     public function test_check_if_not_have_successfully_update_the_book(): void
