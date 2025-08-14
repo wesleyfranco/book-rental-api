@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Interfaces\RepositoryInterface;
 use App\Interfaces\BookRequestInterface;
 
-class BookRepository implements RepositoryInterface
+class BookRepositoryEloquent implements RepositoryInterface
 {
 
     public function __construct(private readonly Book $book) {}

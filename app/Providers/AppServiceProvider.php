@@ -6,8 +6,8 @@ use App\Services\AuthService;
 use App\Services\BookService;
 use App\Http\Requests\BookRequest;
 use App\Http\Requests\LoginRequest;
-use App\Repositories\AuthRepository;
-use App\Repositories\BookRepository;
+use App\Repositories\AuthRepositoryEloquent;
+use App\Repositories\BookRepositoryEloquent;
 use App\Http\Requests\RegisterRequest;
 use App\Interfaces\RepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(BookRequestInterface::class, BookRequest::class);
 
-        $this->app->bind(RepositoryInterface::class, BookRepository::class);
+        $this->app->bind(RepositoryInterface::class, BookRepositoryEloquent::class);
 
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
 
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(LoginRequestInterface::class, LoginRequest::class);
 
-        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepositoryEloquent::class);
     }
 
     /**

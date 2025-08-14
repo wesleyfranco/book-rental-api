@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Interfaces\AuthRepositoryInterface;
 use App\Interfaces\RegisterRequestInterface;
 
-class AuthRepository implements AuthRepositoryInterface
+class AuthRepositoryEloquent implements AuthRepositoryInterface
 {
 
     public function __construct(private readonly User $user) {}
