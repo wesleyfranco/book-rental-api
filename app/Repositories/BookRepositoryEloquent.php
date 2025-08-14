@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Models\Book;
 use App\Interfaces\RepositoryInterface;
 use App\Interfaces\BookRequestInterface;
+use App\Exceptions\BookNotFoundException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookRepositoryEloquent implements RepositoryInterface
 {
@@ -35,23 +37,35 @@ class BookRepositoryEloquent implements RepositoryInterface
 
     public function find(string $id): array
     {
-        $book = $this->book->findOrFail($id);
+        try {
+            $book = $this->book->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new BookNotFoundException('Book not found');
+        }
 
         return $book->toArray();
     }
 
     public function update(BookRequestInterface $request, string $id): array
     {
-        $book = $this->book->findOrFail($id);
-        $book->update($request->validated());
+        try {
+            $book = $this->book->findOrFail($id);
+            $book->update($request->validated());
+        } catch (ModelNotFoundException $e) {
+            throw new BookNotFoundException('Book not found');
+        }
 
         return $book->toArray();
     }
 
     public function delete(string $id): bool
     {
-        $book = $this->book->findOrFail($id);
-        $deleted = $book->delete();
+        try {
+            $book = $this->book->findOrFail($id);
+            $deleted = $book->delete();
+        } catch (ModelNotFoundException $e) {
+            throw new BookNotFoundException('Book not found');
+        }
 
         return (bool) $deleted;
     }

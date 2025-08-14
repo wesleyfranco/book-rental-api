@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Interfaces\BookServiceInterface;
-use App\Interfaces\BookRequestInterface;
 use App\Interfaces\RepositoryInterface;
+use App\Interfaces\BookRequestInterface;
+use App\Interfaces\BookServiceInterface;
+use App\Exceptions\BookNotFoundException;
 
 class BookService implements BookServiceInterface
 {
@@ -29,7 +30,7 @@ class BookService implements BookServiceInterface
     {
         try {
             $book = $this->bookRepository->find($id);
-        } catch (\Throwable $e) {
+        } catch (BookNotFoundException $e) {
             return [];
         }
 
@@ -40,7 +41,7 @@ class BookService implements BookServiceInterface
     {
         try {
             $book = $this->bookRepository->update($request, $id);
-        } catch (\Throwable $e) {
+        } catch (BookNotFoundException $e) {
             return [];
         }
 
@@ -51,7 +52,7 @@ class BookService implements BookServiceInterface
     {
         try {
             $this->bookRepository->delete($id);
-        } catch (\Throwable $e) {
+        } catch (BookNotFoundException $e) {
             return false;
         }
 
