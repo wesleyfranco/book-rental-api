@@ -8,9 +8,9 @@ use App\Models\Book;
 use Illuminate\Support\Str;
 use App\Services\BookService;
 use App\Http\Requests\BookRequest;
-use App\Repositories\BookRepository;
 use App\Interfaces\RepositoryInterface;
 use App\Interfaces\BookServiceInterface;
+use App\Repositories\BookRepositoryEloquent;
 
 class BookServiceTest extends TestCase
 {
@@ -21,7 +21,7 @@ class BookServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->bookRepository = new BookRepository(new Book);
+        $this->bookRepository = new BookRepositoryEloquent(new Book);
         $this->bookService = new BookService($this->bookRepository);
     }
 
